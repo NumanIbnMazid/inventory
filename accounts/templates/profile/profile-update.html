@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head_title %}{% block page_title %}{% block breadcrumb %}
+Update Profile
+{% endblock %}{% endblock %}{% endblock %}
+
+{% block extra_css %}
+<!-- date-time picker CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'vendor/datetimepicker/jquery.datetimepicker.min.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header text-center">
+        <h4 class="card-title">Update Profile</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                {% include 'profile/snippets/profile-tabs.html' %}
+            </div>
+
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <form class="" method="POST" enctype="multipart/form-data" data-toggle="validator" id="profile_form">
+                    {% csrf_token %}
+
+                    {% include 'profile/snippets/form.html' %}
+
+                    <div class="card-action text-center form-group">
+                        <button type="submit" class="btn btn-success m-2" id="profile_update_btn">
+                            Update Profile
+                        </button>
+                        <button class="btn btn-danger" id="go_back">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/datetimepicker/jquery.datetimepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/form-validator/profile-form.js' %}"></script>
+{% endblock %}

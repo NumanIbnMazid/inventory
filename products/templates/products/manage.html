@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head_title %}{% block breadcrumb %}
+{{ page_title }}
+{% endblock %}{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h3 class="mb-0">{{ page_title }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form class="" method="POST" enctype="multipart/form-data" data-toggle="validator" id="product_form">
+                    {% csrf_token %}
+
+                    {% include 'snippets/form.html' %}
+
+                    <div class="card-action text-center form-group">
+                        <button type="submit" class="btn btn-success m-2" id="product_form_btn">
+                            {{ page_title }}
+                        </button>
+                        <button class="btn btn-danger" id="go_back">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mt-4">
+        <p class="font-20 font-bold text-dark">Product List</p>
+        {% include 'products/snippets/list-table.html' %}
+    </div>
+</div>
+
+{% endblock %}

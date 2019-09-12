@@ -1,0 +1,89 @@
+
+{% load static %}
+
+{% block extra_css %}
+<!-- Datatable css -->
+<link rel="stylesheet" href="{% static 'vendor/jquery-datatable/dataTables.min.css' %}" type="text/css" />
+{% endblock %}
+
+
+<div class="table-responsive">
+    <table id="productDataTable" class="cell-border hover table-bordered table-hover text-center"
+        style="width:100%">
+        <thead>
+            <tr>
+                <th width='30%'>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr class="text-dark">
+                <td>
+                    <small>
+                        {{ object.title }}
+                    </small>
+                </td>
+                <td>
+                    <a href="#">
+                        {% if not object.quantity == None %}
+                        {{ object.quantity }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    {% if not object.price == None %}
+                    {{ object.price }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'products:update_product' slug=object.slug %}" class="btn btn-primary btn-sm text-deco-none">
+                        <span class="">
+                            Update
+                        </span>
+                    </a>
+                    <a href="{% url 'products:delete_product' slug=object.slug %}"
+                        class="btn btn-danger btn-sm text-deco-none">
+                        <span class="">
+                            Delete
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div class="alert alert-warning">
+                        No item found!
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="text-center">
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+{% block extra_js %}
+<!-- Datatable JS -->
+<script type="text/javascript" src="{% static 'vendor/jquery-datatable/dataTables.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#productDataTable').DataTable();
+    });
+</script>
+{% endblock %}

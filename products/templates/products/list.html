@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load cool_paginate %}
+
+{% block head_title %}{% block breadcrumb %}
+Products
+{% endblock %}{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <div class="card card-stats mb-4 mb-xl-0 m-2 bg-c-mud">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">
+                            {{ object.title|truncatechars_html:50 }}
+                        </h5>
+                        <span class="h2 font-weight-bold mb-0">
+                            {{ object.price }} $
+                        </span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            {% if object.image %}
+                            <div class="media align-items-center">
+                                <span class="avatar avatar-lg">
+                                    <img src="{{ object.image.url }}" alt="{{ object.title }}">
+                                </span>
+                            </div>
+                            {% else %}
+                            <i class="ni ni-album-2"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-sm">
+                    Add to cart
+                </button>
+                <p class="mt-3 mb-0 font-13 text-primary">
+                    Stock Quantity:
+                    <span class="text-dark mr-2 font-bold">
+                        {{ object.quantity }}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-warning" role="alert">
+        No products found!
+    </div>
+    {% endfor %}
+
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center m-4">
+        {% cool_paginate page_obj=object %}
+    </ul>
+</nav>
+
+{% endblock %}

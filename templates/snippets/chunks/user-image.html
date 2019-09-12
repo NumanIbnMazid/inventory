@@ -1,0 +1,9 @@
+{% load static %}
+<img 
+{% if instance.profile.image %} 
+src="{{ instance.profile.image.url }}" 
+{% else %}
+src="{% static 'images/raw/avatar.png' %}" 
+{% endif %} 
+alt="{{ instance.username }}" 
+class="{{ class }}">
