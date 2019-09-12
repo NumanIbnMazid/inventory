@@ -1,0 +1,45 @@
+{% extends 'angular-base.html' %}
+{% block head_title %}{% block breadcrumb %}
+Rest Api View
+{% endblock %}{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Pname</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th colspan="2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="row" items="${products}">
+                                <tr>
+                                    <td>${row.id}</td>
+                                    <td>${row.title}</td>
+                                    <td>${row.price}</td>
+                                    <td>${row.quantity}</td>
+                                    <td><a href="<%= request.getContextPath()%>/editProduct/${row.pid}">EDIT</a></td>
+                                    <td><a onclick="return confirm('Are you want to delte this item?')"
+                                            href="<%= request.getContextPath()%>/deleteProduct/${row.pid}">DELETE</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

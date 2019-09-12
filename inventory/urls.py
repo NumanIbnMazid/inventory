@@ -9,6 +9,8 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('account/', include('accounts.urls')),
     path('products/', include(('products.urls', 'products'), namespace='products')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('products.api.urls')),
 ]
 
 

@@ -27,6 +27,9 @@ INSTALLED_APPS = [
     'django_countries',
     # Django Paginator
     'django_cool_paginator',
+    # Rest Framework
+    'rest_framework',
+    'corsheaders',
     # Internal Apps
     'accounts',
     'products',
@@ -50,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Corsheader middleware
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'inventory.urls'
@@ -189,3 +194,16 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join('static_cdn', 'static_root')
 MEDIA_ROOT = os.path.join('static_cdn', 'media_root')
+
+
+# Rest Framework Settings
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+# /Rest Framework Settings
+
+CORS_ORIGIN_ALLOW_ALL = True

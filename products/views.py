@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
+from django.views.generic import (CreateView, UpdateView,
+                                  ListView, DetailView, DeleteView, TemplateView)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Product
@@ -45,7 +46,7 @@ class ProductCreateView(CreateView):
 class ProductListView(ListView):
     template_name = 'products/list.html'
     paginate_by = 12
-    
+
     def get_queryset(self):
         qs = Product.objects.all()
         if qs.exists():
@@ -79,7 +80,7 @@ class ProductUpdateView(UpdateView):
                 )
                 return super().form_invalid(form)
         messages.add_message(self.request, messages.SUCCESS,
-                                "Product has been updated successfully!")
+                             "Product has been updated successfully!")
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -121,3 +122,8 @@ class ProductDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('products:add_product')
+
+
+class ProductRestView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return render(request, "pages/rest.html")

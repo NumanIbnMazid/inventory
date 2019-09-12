@@ -6,6 +6,7 @@
 {% url 'account_logout' as logout_url %}
 {% url 'products:add_product' as add_product_url %}
 {% url 'products:list_product' as list_product_url %}
+{% url 'products:rest_product' as rest_product_url %}
 
 {% if request.user.is_authenticated %}
 {% url 'profile_details' slug=request.user.profile.slug as profile_details_url %}
@@ -110,6 +111,12 @@
                     <a class="nav-link {% if request.path == list_product_url %}active{% endif %}"
                         href="{{ list_product_url }}">
                         <i class="ni ni-ui-04 text-primary"></i> Products
+                    </a>
+                </li>
+                <li class="nav-item" class="active">
+                    <a class="nav-link {% if request.path == rest_product_url %}active{% endif %}"
+                        href="{{ rest_product_url }}">
+                        <i class="ni ni-ui-04 text-primary"></i> Api-Angular
                     </a>
                 </li>
             </ul>

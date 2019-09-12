@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block head_title %}Inventory{% endblock %} | Inventory Management System
+    </title>
+    {% include 'snippets/css.html' %}
+    {% block extra_css %}{% endblock %}
+    {% include 'snippets/head-js.html' %}
+</head>
+
+<body ng-controller="appCtrl">
+
+    {% include 'snippets/side-navbar.html' %}
+    <div class="main-content">
+        {% include 'snippets/header-navbar.html' %}
+        <!-- Header -->
+        <div class="header bg-gradient-primary pb-6 pt-5 pt-md-7">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {% block breadcrumb %}{% endblock %}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container-fluid mt--6">
+            {% include 'snippets/messages.html' %}
+            {% block content %}{% endblock %}
+            {% include 'snippets/footer.html' %}
+        </div>
+    </div>
+    <!--   Core   -->
+    {% include 'snippets/scripts.html' %}
+
+    {% block extra_js %}{% endblock %}
+    
+</body>
